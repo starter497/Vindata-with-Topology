@@ -177,11 +177,15 @@ for j in range(len(trainfilename)):
     
 
     np.savez_compressed(results_dir + "/NormalizedBetti_0.npz",Betti0)
+
     np.savez_compressed(results_dir + "/NormalizedBetti_1.npz",Betti1)
+
     np.savez_compressed(results_dir + "/Gauss_0.npz", Gauss0)
+
     np.savez_compressed(results_dir +"/Gauss_1.npz", Gauss1)
-    np.savez_compressed(results_dir +"/Normalizelifespan0.npz", norm_lifespan0)
-    np.savez_compressed(results_dir + "/Normalizelifespan1.npz", norm_lifespan1)
+
+    np.savez_compressed(results_dir +"/Normalizelifecurve0.npz", norm_lifespan0)
+    np.savez_compressed(results_dir + "/Normalizelifecurve1.npz", norm_lifespan1)
 
 
 
