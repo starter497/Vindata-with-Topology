@@ -45,7 +45,7 @@ testfilename = os.listdir(path)
 
 
 
-print("Number of train files:",len(testfilename))
+print("Number of test files:",len(testfilename))
 
 image_dicom =  []
 image = []
