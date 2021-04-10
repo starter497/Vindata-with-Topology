@@ -31,19 +31,6 @@ warnings.filterwarnings("ignore")
 usetex = matplotlib.checkdep_usetex(True) #I dont have latex)
 
 
-# -------------- Functions -----------------
-
-def Avg_Total_lifespan(D,x,y,t): # D= diagram, x = birth value, y = death value, t= input
-    return (y-x)*t
-
-def stat(A):
-    if len(A) ==0 :
-        return 0
-    else:
-        return np.mean(A)
-
-
-
 
 
 
@@ -183,17 +170,18 @@ for j in range(len(trainfilename)):
 #---------------0 and 1 dimensional average Normalized Total lifespan curve info -------
 
 
-    AvgTotallife0 = D0.custom_curve(Avg_Total_lifespan, stat , 0 , 256, 256)
+    norm_lifespan0 = D0.normalizelifecurve(0 , 256, 256)
    
-    AvgTotallife1 = D0.custom_curve(Avg_Total_lifespan , stat , 0,  256, 256)
+    norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
     
 
-    np.savez_compressed( results_dir + "/NormalizedBetti_0.npz",Betti0)
+    np.savez_compressed(results_dir + "/NormalizedBetti_0.npz",Betti0)
     np.savez_compressed(results_dir + "/NormalizedBetti_1.npz",Betti1)
     np.savez_compressed(results_dir + "/Gauss_0.npz", Gauss0)
     np.savez_compressed(results_dir +"/Gauss_1.npz", Gauss1)
-    
+    np.savez_compressed(results_dir +"/Normalizelifespan0.npz", norm_lifespan0)
+    np.savez_compressed(results_dir + "/Normalizelifespan1.npz", norm_lifespan1)
 
 
 
