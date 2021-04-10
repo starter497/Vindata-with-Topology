@@ -31,21 +31,6 @@ warnings.filterwarnings("ignore")
 usetex = matplotlib.checkdep_usetex(True) #I dont have latex)
 
 
-# -------------- Functions -----------------
-
-def Avg_Total_lifespan(D,x,y,t): # D= diagram, x = birth value, y = death value, t= input
-    return (y-x)*t
-
-def stat(A):
-    if len(A) ==0 :
-        return 0
-    else:
-        return np.mean(A)
-
-
-
-
-
 
 
 
@@ -65,7 +50,8 @@ print("Number of train files:",len(testfilename))
 image_dicom =  []
 image = []
 
-'''
+''' useful if you want to store everything without saving.
+
 ALL_PD0 = []    #all of the persistent diagram information 0dimension
 ALL_PD1 = []    #all of persistent diagram info 1dimension
 BC0 = []       #all of betticurve 0-dim
@@ -181,19 +167,23 @@ for j in range(len(testfilename)):
 #---------------0 and 1 dimensional average Normalized Total lifespan curve info -------
 
 
-    AvgTotallife0 = D0.custom_curve(Avg_Total_lifespan, stat , 0 , 256, 256)
+    norm_lifespan0 = D0.normmalizelifecurve(0 , 256, 256)
    
-    AvgTotallife1 = D0.custom_curve(Avg_Total_lifespan , stat , 0,  256, 256)
+    norm_lifespan1 = D1.normalizelifecurve(0,  256, 256)
 
     
 
     np.savez_compressed( results_dir + "/NormalizedBetti_0.npz",Betti0)
-    #np.savez_compressed('data.npz',ALL_PD0)
     
     np.savez_compressed(results_dir + "/NormalizedBetti_1.npz",Betti1)
+
     np.savez_compressed(results_dir + "/Gauss_0.npz", Gauss0)
+
     np.savez_compressed(results_dir +"/Gauss_1.npz", Gauss1)
-    
+
+    np.savez_compressed(results_dir + "/Normalizelifecurve0", norm_lifespan0)
+
+    np.savez_compressed(results_dir + "/Normalizelifecurve1", norm_lifespan1)
 
 
 
