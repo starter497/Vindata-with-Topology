@@ -170,7 +170,7 @@ for j in range(len(trainfilename)):
 #---------------0 and 1 dimensional average Normalized Total lifespan curve info -------
 
 
-    norm_lifespan0 = D0.normalizelifecurve(0 , 256, 256)
+    norm_lifespan0 = D0.normalizedlifecurve(0 , 256, 256)
    
     norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
