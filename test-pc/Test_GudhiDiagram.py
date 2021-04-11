@@ -146,9 +146,9 @@ for j in range(len(testfilename)):
 #---------------------0 and 1 dimensional Betti curve (number of points in Fundamental box) info ----------------------
 
 
-    Betti0 = D0.normalizedBetticurve(meshstart=0,meshstop= 256 ,num_in_mesh= 256)
+    Betti0 = D0.normalizedBetticurve(meshstart=0,meshstop= max_pixel+1 ,num_in_mesh= max_pixel+1)
 
-    Betti1 = D1.normalizedBetticurve(meshstart=0,meshstop= 256, num_in_mesh = 256)
+    Betti1 = D1.normalizedBetticurve(meshstart=0,meshstop= max_pixel+1, num_in_mesh = max_pixel+1)
 
     
 
@@ -156,9 +156,9 @@ for j in range(len(testfilename)):
 
 
 
-    Gauss0= D0.gaussian_life(meshstart=0, meshstop= 256,num_in_mesh=256, spread = 1)
+    Gauss0= D0.gaussian_life(meshstart=0, meshstop= max_pixel+1,num_in_mesh=max_pixel+1, spread = 1)
 
-    Gauss1= D1.gaussian_life(meshstart=0, meshstop= 256, num_in_mesh=256, spread = 1)
+    Gauss1= D1.gaussian_life(meshstart=0, meshstop= max_pixel+1, num_in_mesh=max_pixel+1, spread = 1)
 
        
 
@@ -167,9 +167,9 @@ for j in range(len(testfilename)):
 #---------------0 and 1 dimensional average Normalized Total lifespan curve info -------
 
 
-    norm_lifespan0 = D0.normalizedlifecurve(0 , 256, 256)
+    norm_lifespan0 = D0.normalizedlifecurve(0 , max_pixel+1, max_pixel+1)
    
-    norm_lifespan1 = D1.normalizelifedcurve(0,  256, 256)
+    norm_lifespan1 = D1.normalizelifedcurve(0,  max_pixel+1, max_pixel+1)
 
     
 
