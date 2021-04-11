@@ -85,9 +85,9 @@ for j in range(len(trainfilename)):
 
     image = image_dicom[j].pixel_array
 
-    max_pixel = np.amax(image)
+    #max_pixel = np.amax(image)
 
-    ''' We are not rescaling so leave this uncommented
+    
 
     # -----------------Rescaling Pixel intensity to 0-255 ---------------
     
@@ -98,7 +98,7 @@ for j in range(len(trainfilename)):
 
     image = np.uint8(image) 
    
-    '''
+    
     
    
    # print(image.shape) #Note NOT ALL IMAGES ARE SAME SIZE
@@ -149,9 +149,9 @@ for j in range(len(trainfilename)):
 #---------------------0 and 1 dimensional Betti curve (number of points in Fundamental box) info ----------------------
 
 
-    Betti0 = D0.normalizedBetticurve(meshstart=0,meshstop= max_pixel+1 ,num_in_mesh= max_pixel +1)
+    Betti0 = D0.normalizedBetticurve(meshstart=0,meshstop= 256 ,num_in_mesh= 256)
 
-    Betti1 = D1.normalizedBetticurve(meshstart=0,meshstop= max_pixel+1, num_in_mesh = max_pixel+1)
+    Betti1 = D1.normalizedBetticurve(meshstart=0,meshstop= 256, num_in_mesh = 256)
 
     
 
@@ -159,9 +159,9 @@ for j in range(len(trainfilename)):
 
 
 
-    Gauss0= D0.gaussian_life(meshstart=0, meshstop= max_pixel+1,num_in_mesh=max_pixel+1, spread = 1)
+    Gauss0= D0.gaussian_life(meshstart=0, meshstop= 256,num_in_mesh=256, spread = 1)
 
-    Gauss1= D1.gaussian_life(meshstart=0, meshstop= max_pixel+1, num_in_mesh=max_pixel+1, spread = 1)
+    Gauss1= D1.gaussian_life(meshstart=0, meshstop= 256, num_in_mesh= 256, spread = 1)
 
        
 
@@ -170,9 +170,9 @@ for j in range(len(trainfilename)):
 #---------------0 and 1 dimensional average Normalized Total lifespan curve info -------
 
 
-    norm_lifespan0 = D0.normalizedlifecurve(0 , max_pixel+1, max_pixel+1)
+    norm_lifespan0 = D0.normalizedlifecurve(0 , 256, 256)
    
-    norm_lifespan1 = D1.normalizedlifecurve(0,  max_pixel+1, max_pixel+1)
+    norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
     
 
