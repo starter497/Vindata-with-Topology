@@ -31,6 +31,25 @@ warnings.filterwarnings("ignore")
 usetex = matplotlib.checkdep_usetex(True) #I dont have latex)
 
 
+#--------------------- Functions -----------------
+
+def calculate_diagram_gudhi(image):
+
+    reshaped = np.reshape(image, [image.shape[0]*image.shape[1]], order = 'F')
+    # reshapes image to a single vector
+
+    Complex = gudhi.CubicalComplex(dimensions=image.shape, top_dimensional_cells=reshaped)
+    # creates the cubical complex from the image
+
+    Complex.persistence()
+
+    Dgm0 = Complex.persistence_intervals_in_dimension(0)
+    # compute oth dimensional persistence diagram
+
+    Dgm1 = Complex.persistence_intervals_in_dimension(1)
+
+    return Dgm0, Dgm1
+
 
 
 
@@ -95,7 +114,7 @@ for j in range(len(testfilename)):
 
     image = np.uint8(image) 
    
-    '''
+    
     
    
    # print(image.shape) #Note NOT ALL IMAGES ARE SAME SIZE
@@ -104,27 +123,9 @@ for j in range(len(testfilename)):
    #print(image_dicom[j])  #if you want to see the meta-data
 
    #show_PIL(image_dicom[j]) #if you want to see the images
-
-
-     #######################################################################
-     # define this as a function called calculate_gudhi outside of the for loop.
-     # then replace this part of the code in the loop by calculate_gudhi(image- currently looping over(called image above))
-     # [dgm0,dgm1] = calculate_gudhi(image)
-     #
-    reshaped = np.reshape(image, [image.shape[0]*image.shape[1]], order = 'F')
-    # reshapes image to a single vector
-
-    Complex = gudhi.CubicalComplex(dimensions=image.shape, top_dimensional_cells=reshaped)
-    # creates the cubical complex from the image
-     
-    Complex.persistence()
-    #######################################################################
-    Dgm0 = Complex.persistence_intervals_in_dimension(0)
-    # compute oth dimensional persistence diagram
-
-    Dgm1 = Complex.persistence_intervals_in_dimension(1)
-   
     
+    [Dgm0,Dgm1] =calculate_diagram_gudhi(image)
+
     print(j) #tells you the progress, finish at 15,000
 
 
@@ -173,7 +174,7 @@ for j in range(len(testfilename)):
 
     norm_lifespan0 = D0.normalizedlifecurve(0 , 256, 256)
    
-    norm_lifespan1 = D1.normalizelifedcurve(0,  256, 256)
+    norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
     
 
