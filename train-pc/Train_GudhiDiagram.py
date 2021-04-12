@@ -33,6 +33,24 @@ usetex = matplotlib.checkdep_usetex(True) #I dont have latex)
 
 
 
+#--------------------- Functions -----------------
+
+def calculate_diagram_gudhi(image):
+
+    reshaped = np.reshape(image, [image.shape[0]*image.shape[1]], order = 'F')
+    # reshapes image to a single vector
+
+    Complex = gudhi.CubicalComplex(dimensions=image.shape, top_dimensional_cells=reshaped)
+    # creates the cubical complex from the image
+
+    Complex.persistence()
+
+    Dgm0 = Complex.persistence_intervals_in_dimension(0)
+    # compute oth dimensional persistence diagram
+
+    Dgm1 = Complex.persistence_intervals_in_dimension(1)
+
+    return Dgm0, Dgm1
 
 
 
@@ -44,10 +62,6 @@ usetex = matplotlib.checkdep_usetex(True) #I dont have latex)
 path = r"/vindata/train/"
 
 trainfilename = os.listdir(path)
-
-Dir= os.getcwd()
-
-print(Dir)
 
 print("Number of train files:",len(trainfilename))
 
@@ -85,8 +99,8 @@ for j in range(len(trainfilename)):
 
     image = image_dicom[j].pixel_array
 
-    #max_pixel = np.amax(image)
-
+    max_pixel = np.amax(image)
+    print("maxpixel:", max_pixel)
     
 
     # -----------------Rescaling Pixel intensity to 0-255 ---------------
@@ -101,7 +115,7 @@ for j in range(len(trainfilename)):
     
     
    
-   # print(image.shape) #Note NOT ALL IMAGES ARE SAME SIZE
+    print(image.shape) #Note NOT ALL IMAGES ARE SAME SIZE
 
 
    #print(image_dicom[j])  #if you want to see the meta-data
@@ -110,20 +124,7 @@ for j in range(len(trainfilename)):
 
 
 
-    reshaped = np.reshape(image, [image.shape[0]*image.shape[1]], order = 'F')
-    # reshapes image to a single vector
-
-    Complex = gudhi.CubicalComplex(dimensions=image.shape, top_dimensional_cells=reshaped)
-    # creates the cubical complex from the image
-
-    Complex.persistence()
-
-    Dgm0 = Complex.persistence_intervals_in_dimension(0)
-    # compute oth dimensional persistence diagram
-
-    Dgm1 = Complex.persistence_intervals_in_dimension(1)
-    
-    
+    [Dgm0,Dgm1] = calculate_diagram_gudhi(image)
     print(j) #tells you the progress, finish at 15,000
 
 
@@ -186,7 +187,6 @@ for j in range(len(trainfilename)):
 
     np.savez_compressed(results_dir +"/Normalizelifecurve0.npz", norm_lifespan0)
     np.savez_compressed(results_dir + "/Normalizelifecurve1.npz", norm_lifespan1)
-
 
 
 '''
