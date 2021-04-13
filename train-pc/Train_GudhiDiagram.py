@@ -63,6 +63,17 @@ path = r"/vindata/train/"
 
 trainfilename = os.listdir(path)
 
+
+dir_pc = os.path.join("/vindata","train-pc")
+
+os.mkdir(dir_pc)    #persistence curve directory
+
+dir_im = os.path.join ("/vindata", "train-images")
+
+os.mkdir(dir_im)    #pixel array directory
+
+
+
 print("Number of train files:",len(trainfilename))
 
 image_dicom =  []
@@ -78,6 +89,7 @@ G1 = []
 ATL0 = []
 ATL1 = []
 '''
+PC = []
 
 for j in range(len(trainfilename)):
 
@@ -85,7 +97,7 @@ for j in range(len(trainfilename)):
     
     ID = os.path.splitext(trainfilename[j])[0]
     
-
+    '''
     results_dir = os.path.dirname(__file__)
 
     results_dir = os.path.join(results_dir, ID + "-pc" )
@@ -93,7 +105,7 @@ for j in range(len(trainfilename)):
     if not os.path.isdir(results_dir):
 
        os.makedirs(results_dir)
-    
+    '''    
 
     image_dicom.append(pydicom.dcmread(path + trainfilename[j]))
 
@@ -122,6 +134,8 @@ for j in range(len(trainfilename)):
 
    #show_PIL(image_dicom[j]) #if you want to see the images
 
+
+    np.save("/vindata/train-images/" +ID, image)
 
 
     [Dgm0,Dgm1] = calculate_diagram_gudhi(image)
@@ -176,17 +190,12 @@ for j in range(len(trainfilename)):
     norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
     
+    PC = np.concatenate((Betti0, Betti1, Gauss0, Gauss1, norm_lifespan0, norm_lifespan1))
 
-    np.savez_compressed(results_dir + "/NormalizedBetti_0.npz",Betti0)
 
-    np.savez_compressed(results_dir + "/NormalizedBetti_1.npz",Betti1)
 
-    np.savez_compressed(results_dir + "/Gauss_0.npz", Gauss0)
+    np.save("/vindata/train-pc/"+ ID,PC)
 
-    np.savez_compressed(results_dir +"/Gauss_1.npz", Gauss1)
-
-    np.savez_compressed(results_dir +"/Normalizelifecurve0.npz", norm_lifespan0)
-    np.savez_compressed(results_dir + "/Normalizelifecurve1.npz", norm_lifespan1)
 
 
 '''
