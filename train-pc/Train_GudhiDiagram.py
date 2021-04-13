@@ -190,7 +190,7 @@ for j in range(len(trainfilename)):
     norm_lifespan1 = D1.normalizedlifecurve(0,  256, 256)
 
     
-    PC = np.concatenate((Betti0, Betti1, Gauss0, Gauss1, norm_lifespan0, norm_lifespan1))
+    PC = np.concatenate((Betti0, norm_lifespan0, Gauss0, Betti1, norm_lifespan1, Gauss1))
 
 
 
