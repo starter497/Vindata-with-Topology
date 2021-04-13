@@ -63,6 +63,16 @@ path = r"/vindata/test/"
 testfilename = os.listdir(path)
 
 
+dir_pc = os.path.join("/vindata","test-pc")
+
+os.mkdir(dir_pc)    #persistence curve directory
+
+dir_im = os.path.join ("/vindata", "test-images")
+
+os.mkdir(dir_im)    #pixel array directory
+
+
+
 
 print("Number of test files:",len(testfilename))
 
@@ -81,13 +91,15 @@ ATL0 = []
 ATL1 = []
 '''
 
-for j in range(len(testfilename)):
+PC = []
+
+for j in range(3):
 
      #remove comment if you want to make a directory for saving plots(not necessary)
     
     ID = os.path.splitext(testfilename[j])[0]
     
-
+    '''
     results_dir = os.path.dirname(__file__)
 
     results_dir = os.path.join(results_dir, ID + "-pc" )
@@ -96,6 +108,7 @@ for j in range(len(testfilename)):
 
        os.makedirs(results_dir)
     
+    '''
 
     image_dicom.append(pydicom.dcmread(path + testfilename[j]))
 
@@ -124,6 +137,9 @@ for j in range(len(testfilename)):
 
    #show_PIL(image_dicom[j]) #if you want to see the images
     
+
+    np.save("/vindata/test-images/" +ID, image)
+
     [Dgm0,Dgm1] =calculate_diagram_gudhi(image)
 
     print(j) #tells you the progress, finish at 15,000
@@ -178,19 +194,10 @@ for j in range(len(testfilename)):
 
     
 
-    np.savez_compressed( results_dir + "/NormalizedBetti_0.npz",Betti0)
     
-    np.savez_compressed(results_dir + "/NormalizedBetti_1.npz",Betti1)
+    PC = np.concatenate((Betti0, Betti1, Gauss0, Gauss1, norm_lifespan0, norm_lifespan1))
 
-    np.savez_compressed(results_dir + "/Gauss_0.npz", Gauss0)
-
-    np.savez_compressed(results_dir +"/Gauss_1.npz", Gauss1)
-
-    np.savez_compressed(results_dir + "/Normalizelifecurve0", norm_lifespan0)
-
-    np.savez_compressed(results_dir + "/Normalizelifecurve1", norm_lifespan1)
-
-
+    np.save("/vindata/test-pc/" + ID, PC)
 
 '''
  #uncomment to plot betticurves
