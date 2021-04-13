@@ -93,7 +93,7 @@ ATL1 = []
 
 PC = []
 
-for j in range(3):
+for j in range(len(testfilename)):
 
      #remove comment if you want to make a directory for saving plots(not necessary)
     
