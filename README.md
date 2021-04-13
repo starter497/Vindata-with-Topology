@@ -5,6 +5,8 @@ a pip install. The computer you are using should have PIP installed. To do a pip
 
 $pip install persistencecurves
 
+If the pip and python are not up to date, you may have to enter in the command line, pip3 or python3 instead.
+
 To run the code, be sure you are using the latest python version.
 
 For many of us, you must enter $python3 filename.py 
