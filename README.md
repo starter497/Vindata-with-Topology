@@ -16,3 +16,6 @@ For the test python files the code will create the pixel array and persistence c
 created titled test images and test-pc.
 
 As of now, the code will generate an a 6 row array with each row consisting of a persistence curve for 1 and 0 dimensional holes.
+
+When downloading the zip file, be sure to unzip the three main components, Train_GudhiDiagram.py, Test_GudhiDiagram, and pydicom_PIL.py
+files and move them into the /vindata/ directory.  Note you only need one pydicom_PIL.py file in the /vindata/ directory.
