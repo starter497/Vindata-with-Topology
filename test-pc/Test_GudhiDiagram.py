@@ -195,7 +195,7 @@ for j in range(3):
     
 
     
-    PC = np.concatenate((Betti0, Betti1, Gauss0, Gauss1, norm_lifespan0, norm_lifespan1))
+    PC = np.concatenate((Betti0, norm_lifespan0, Gauss0, Betti1, norm_lifespan1, Gauss1))
 
     np.save("/vindata/test-pc/" + ID, PC)
 
